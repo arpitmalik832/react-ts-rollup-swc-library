@@ -1,0 +1,49 @@
+{
+  "files": [
+    {
+      "fileName": "esm/index.js",
+      "size": 89,
+      "gzippedSize": 98,
+      "brotliSize": 70,
+      "contentType": "chunk",
+      "percentageBySize": "15.06"
+    },
+    {
+      "fileName": "esm/components/atoms/Button/index.js",
+      "size": 130,
+      "gzippedSize": 127,
+      "brotliSize": 91,
+      "contentType": "chunk",
+      "percentageBySize": "22.00"
+    },
+    {
+      "fileName": "types/components/atoms/Button/index.d.ts",
+      "size": 309,
+      "gzippedSize": 212,
+      "brotliSize": 176,
+      "contentType": "asset",
+      "percentageBySize": "52.28"
+    },
+    {
+      "fileName": "types/index.d.ts",
+      "size": 63,
+      "gzippedSize": 79,
+      "brotliSize": 64,
+      "contentType": "asset",
+      "percentageBySize": "10.66"
+    }
+  ],
+  "totalSize": 591,
+  "totalGzippedSize": 516,
+  "totalBrotliSize": 401,
+  "buildDuration": 170,
+  "noOfFiles": 4,
+  "largestFile": {
+    "fileName": "types/components/atoms/Button/index.d.ts",
+    "size": 309,
+    "gzippedSize": 212,
+    "brotliSize": 176,
+    "contentType": "asset",
+    "percentageBySize": "52.28"
+  }
+}
