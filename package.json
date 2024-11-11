@@ -179,7 +179,7 @@
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^5.0.0",
-    "eslint-plugin-storybook": "^0.10.1",
+    "eslint-plugin-storybook": "^0.11.0",
     "express": "^4.21.1",
     "husky": "^9.1.6",
     "identity-obj-proxy": "^3.0.0",
