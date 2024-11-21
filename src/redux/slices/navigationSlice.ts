@@ -1,5 +1,6 @@
 import {
   createSlice,
+  PayloadAction,
   SliceCaseReducers,
   SliceSelectors,
 } from '@reduxjs/toolkit';
@@ -18,11 +19,14 @@ const navigationSlice = createSlice<
     stack: [],
   },
   reducers: {
-    pushStack: (state, action) => {
+    pushStack: (
+      state: NavigationRedux,
+      action: PayloadAction<VoidFunction>,
+    ) => {
       state.stack.push(action.payload);
       return state;
     },
-    popStack: state => {
+    popStack: (state: NavigationRedux) => {
       const top = state.stack.pop();
       if (top) {
         top();

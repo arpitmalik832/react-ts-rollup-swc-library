@@ -1,27 +1,25 @@
 import tokens from '../../../static/enums/design_tokens.json';
+import { TypographyScaleObject } from '../../types/types.d';
 import classnames from '../../utils/classNames';
 import { capitalizeFirstChar } from '../../utils/stringUtils';
 
 import s from './index.scss';
 
-type TypographyScale = Record<
-  'font-size' | 'line-height' | 'letter-spacing',
-  Record<'value', string>
->;
-
-function Typography() {
-  function getStyleObject(input: TypographyScale) {
-    const styles = Object.entries(input).map(([property, valueObj]) => {
-      const propName = property
-        ?.split('-')
-        ?.map((namePart, idx) =>
-          idx > 0 ? capitalizeFirstChar(namePart) : namePart,
-        )
-        ?.join('');
-      return [propName, valueObj.value];
-    });
-    return Object.fromEntries(styles);
-  }
+const Typography = () => {
+  const getStyleObject = (input: TypographyScaleObject) => {
+    const styles: [PropertyKey, string][] = Object.entries(input).map(
+      ([property, valueObj]) => {
+        const propName = property
+          ?.split('-')
+          ?.map((namePart, idx) =>
+            idx > 0 ? capitalizeFirstChar(namePart) : namePart,
+          )
+          ?.join('');
+        return [propName, valueObj.value];
+      },
+    );
+    return Object.fromEntries<string>(styles);
+  };
 
   return (
     <div className={s.typeContainer}>
@@ -88,6 +86,6 @@ function Typography() {
       </section>
     </div>
   );
-}
+};
 
 export default Typography;
