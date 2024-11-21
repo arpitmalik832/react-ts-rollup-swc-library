@@ -3,8 +3,8 @@ import copy from 'rollup-plugin-copy';
 /**
  * @returns {import('rollup').InputPluginOption}
  */
-function config() {
-  return copy({
+const config = () =>
+  copy({
     targets: [
       {
         src: 'static/styles/*',
@@ -24,6 +24,5 @@ function config() {
       },
     ],
   });
-}
 
 export default config;

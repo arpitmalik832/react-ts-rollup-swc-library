@@ -1,20 +1,24 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "ESNext",
-    "declaration": true,
+    "module": "esnext",
     "jsx": "react-jsx",
-    "resolveJsonModule": true,
-    "emitDeclarationOnly": true,
-    "outDir": "./dist/types",
-    "rootDir": ".",
     "strict": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "removeComments": true,
-    "moduleResolution": "Node",
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true, // Generate declaration files
+    "declarationDir": "dist/types", // Output directory for declaration files
+    "emitDeclarationOnly": true,
     "downlevelIteration": true
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "__tests__"]
+  "include": [
+    ".storybook/**/*",
+    "build_utils/**/*",
+    "src/**/*",
+    "jest.setup.ts",
+    "svgr.config.ts"
+  ]
 }

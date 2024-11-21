@@ -1,10 +1,21 @@
+import { Compiler, WebpackPluginInstance } from 'webpack';
 import { writeFileSync, mkdirSync } from 'fs';
 import { dirname } from 'path';
 import zlib from 'zlib';
+import {
+  BuildStatsPluginOptions,
+  CompleteStats,
+} from '../../../src/types/types.d';
 
-class BuildStatsPlugin {
-  constructor(options = {}) {
-    this.outputPath = options.outputPath || 'bundle-stats.json';
+class BuildStatsPlugin implements WebpackPluginInstance {
+  outputPath: string;
+
+  startTime: number;
+
+  stats: CompleteStats;
+
+  constructor(options: BuildStatsPluginOptions) {
+    this.outputPath = options.outputPath ?? 'bundle-stats.json';
     this.startTime = 0;
     this.stats = {
       files: [],
@@ -17,7 +28,7 @@ class BuildStatsPlugin {
     };
   }
 
-  apply(compiler) {
+  apply(compiler: Compiler) {
     compiler.hooks.beforeCompile.tap('BuildStatsPlugin', () => {
       this.startTime = Date.now();
     });
@@ -39,8 +50,8 @@ class BuildStatsPlugin {
           .forEach(fileName => {
             const asset = compilation.assets[fileName];
             const size = asset.size();
-            const gzippedSize = zlib.gzipSync(asset.source()).length;
-            const brotliSize = zlib.brotliCompressSync(asset.source()).length;
+            const gzippedSize = zlib.gzipSync(asset.source())?.length;
+            const brotliSize = zlib.brotliCompressSync(asset.source())?.length;
 
             let contentType = 'asset';
             compilation.chunkGroups.forEach(chunkGroup => {
@@ -64,9 +75,9 @@ class BuildStatsPlugin {
             this.stats.totalBrotliSize += brotliSize;
           });
 
-        this.stats.noOfFiles = this.stats.files.length;
+        this.stats.noOfFiles = this.stats.files?.length;
 
-        if (this.stats.files.length > 0) {
+        if (this.stats.files?.length > 0) {
           this.stats.files = this.stats.files.map(i => ({
             ...i,
             percentageBySize: ((i.size / this.stats.totalSize) * 100).toFixed(
