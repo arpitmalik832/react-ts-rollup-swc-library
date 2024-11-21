@@ -2,7 +2,7 @@
 import { readFile, writeFile } from 'fs/promises';
 import { join } from 'path';
 
-async function updateTypographyUse() {
+const updateTypographyUse = async () => {
   const filePath = join('dist', 'styles', 'mixins', 'typography.scss');
   try {
     let content = await readFile(filePath, 'utf8');
@@ -15,6 +15,6 @@ async function updateTypographyUse() {
   } catch (error) {
     console.error('Error updating typography.scss ->', error);
   }
-}
+};
 
 updateTypographyUse();
