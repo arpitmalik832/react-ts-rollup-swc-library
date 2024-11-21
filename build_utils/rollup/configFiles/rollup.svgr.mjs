@@ -11,7 +11,7 @@ import { ENVS } from '../../config/index.mjs';
 /**
  * @returns {import('rollup').RollupOptions[]}
  */
-function getAddons() {
+const getAddons = () => {
   const addMinimizer =
     process.env.LIB_ENV && [ENVS.PROD, ENVS.BETA].includes(process.env.LIB_ENV);
   const addVisualizer = process.env.INCLUDE_VISUALIZER === 'true';
@@ -23,12 +23,12 @@ function getAddons() {
   if (addBuildStats) configs.push(buildStatsConfig('svgr'));
 
   return configs;
-}
+};
 
 /**
  * @returns {import('rollup').RollupOptions}
  */
-function getConfig() {
+const getConfig = () => {
   if (!process.env.LIB_ENV) {
     throw new Error(ERR_NO_LIB_ENV_FLAG);
   }
@@ -42,6 +42,6 @@ function getConfig() {
     ...baseConfig,
     plugins: [...baseConfig.plugins, ...addons.flatMap(addon => addon.plugins)],
   };
-}
+};
 
 export default getConfig;

@@ -1,6 +1,6 @@
-import { BuildStatsPlugin } from '../customPlugins/BuildStats.mjs';
+import { BuildStatsPlugin } from '../customPlugins/BuildStats';
 
-function getConfig() {
+const getConfig = () => {
   const timestamp = new Date().toISOString().replace(/:/g, '-');
   const path = `distInfo/storybook/${process.env.STORY_ENV}/buildStats`;
 
@@ -11,6 +11,6 @@ function getConfig() {
       }),
     ],
   };
-}
+};
 
 export default getConfig;

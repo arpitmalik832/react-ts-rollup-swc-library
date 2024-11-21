@@ -1,10 +1,10 @@
 const config = {
   '**/*.{mjs,cjs,js,jsx,ts,tsx,mdx,md}': [
-    'yarn lint-js:fix',
-    'yarn prettier:fix',
+    'pnpm lint-js:fix',
+    'pnpm prettier:fix',
   ],
-  '**/*.{css,scss}': ['yarn lint-css:fix', 'yarn prettier:fix'],
-  '**/*.json': ['yarn prettier:fix'],
+  '**/*.{css,scss}': ['pnpm lint-css:fix', 'pnpm prettier:fix'],
+  '**/*.json': ['pnpm prettier:fix'],
 };
 
 export default config;
