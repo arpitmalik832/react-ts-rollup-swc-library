@@ -2,10 +2,28 @@ import { Compiler, WebpackPluginInstance } from 'webpack';
 import { writeFileSync, mkdirSync } from 'fs';
 import { dirname } from 'path';
 import zlib from 'zlib';
-import {
-  BuildStatsPluginOptions,
-  CompleteStats,
-} from '../../../src/types/types.d';
+
+interface BuildStatsPluginOptions {
+  outputPath?: string;
+}
+
+interface FileStats {
+  fileName: string;
+  size: number;
+  gzippedSize: number;
+  brotliSize: number;
+  contentType: string;
+}
+
+interface CompleteStats {
+  files: FileStats[];
+  totalSize: number;
+  totalGzippedSize: number;
+  totalBrotliSize: number;
+  noOfFiles: number;
+  largestFile: FileStats | null;
+  buildDuration: number;
+}
 
 class BuildStatsPlugin implements WebpackPluginInstance {
   outputPath: string;

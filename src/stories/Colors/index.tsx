@@ -8,7 +8,7 @@ import {
   ColorType,
   ColorTheme,
   PrimitiveColor,
-} from '../../types/types.d';
+} from './types';
 
 const Colors = () => {
   const getColorValue = (

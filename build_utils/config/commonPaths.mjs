@@ -9,6 +9,7 @@ const iconsPath = join(PROJECT_ROOT, 'src', 'assets', 'icons');
 const iconsListJSPath = join(PROJECT_ROOT, 'static', 'enums', 'icons_list.mjs');
 const iconsListTSPath = join(PROJECT_ROOT, 'static', 'enums', 'icons_list.ts');
 const stylesPath = join(outputPath, 'index.css');
+const distInfoPath = join(PROJECT_ROOT, 'distInfo');
 
 export {
   projectRootPath,
@@ -18,4 +19,5 @@ export {
   iconsListJSPath,
   iconsListTSPath,
   stylesPath,
+  distInfoPath,
 };
