@@ -1,12 +1,12 @@
 import TerserPlugin from 'terser-webpack-plugin';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import CompressionPlugin from 'compression-webpack-plugin';
-
-import { ENVS } from '../build_utils/config/index.mjs';
-import svgrConfig from '../svgr.config.mjs';
-import { ERR_NO_STORY_ENV_FLAG } from '../build_utils/config/logs.mjs';
-import getBundleAnalyzerConfig from '../build_utils/webpack/configs/webpack.bundleanalyzer.mjs';
-import getBuildStatsConfig from '../build_utils/webpack/configs/webpack.buildstats.mjs';
+import { Configuration, RuleSetRule } from 'webpack';
+import { ENVS } from '../build_utils/config';
+import svgrConfig from '../svgrConfig';
+import { ERR_NO_STORY_ENV_FLAG } from '../build_utils/config/logs';
+import getBundleAnalyzerConfig from '../build_utils/webpack/configs/webpack.bundleanalyzer';
+import getBuildStatsConfig from '../build_utils/webpack/configs/webpack.buildstats';
 
 export default {
   stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)', '../src/**/*.mdx'],
@@ -19,33 +19,33 @@ export default {
     'storybook-addon-render-modes',
   ],
   framework: '@storybook/react-webpack5',
-  webpackFinal: async (config, { configType }) => {
+  webpackFinal: (config: Configuration) => {
     if (!process.env.STORY_ENV) {
       throw new Error(ERR_NO_STORY_ENV_FLAG);
     }
 
-    const isRelease = process.env.STORY_ENV === ENVS.PROD;
+    const isProd = process.env.STORY_ENV === ENVS.PROD;
     const isBeta = process.env.STORY_ENV === ENVS.BETA;
 
     // adding handling for js files
-    config.module.rules.push({
+    config.module!.rules!.push({
       test: /\.(ts|tsx)$/,
       exclude: /node_modules/,
       use: ['swc-loader'],
     });
 
     // adding handling for svg files
-    const fileLoaderRule = config.module.rules.find(
-      rule => !Array.isArray(rule.test) && rule.test.test('.svg'),
+    const fileLoaderRule = (config.module!.rules as RuleSetRule[]).find(
+      rule => !Array.isArray(rule.test) && (rule.test as RegExp).test('.svg'),
     );
-    fileLoaderRule.exclude = /\.svg$/;
-    config.module.rules.push({
+    fileLoaderRule!.exclude = /\.svg$/;
+    config.module!.rules!.push({
       test: /\.svg$/,
       use: [{ loader: '@svgr/webpack', options: svgrConfig }, 'url-loader'],
     });
 
     // adding handling for sass and scss files
-    config.module.rules.push({
+    config.module!.rules!.push({
       test: /\.(scss|sass)$/,
       exclude: /node_modules/,
       use: [
@@ -57,7 +57,7 @@ export default {
             modules: {
               mode: 'local',
               localIdentName:
-                isRelease || isBeta
+                isProd || isBeta
                   ? '[hash:base64:5]'
                   : '[name]-[local]-[hash:base64:5]',
             },
@@ -69,19 +69,20 @@ export default {
     });
 
     // adding code splitting
+    // eslint-disable-next-line no-param-reassign
     config.optimization = {
       ...config.optimization,
-      minimize: isRelease || isBeta,
+      minimize: isProd || isBeta,
       minimizer:
-        isRelease || isBeta
+        isProd || isBeta
           ? [
               new TerserPlugin({
                 terserOptions: {
                   compress: {
                     inline: false,
-                    drop_console: !!isRelease,
+                    drop_console: isProd,
                     dead_code: true,
-                    drop_debugger: !!isRelease,
+                    drop_debugger: isProd,
                     conditionals: true,
                     evaluate: true,
                     booleans: true,
@@ -119,7 +120,7 @@ export default {
     };
 
     // adding compression plugin
-    config.plugins.push(
+    config.plugins!.push(
       new CompressionPlugin({
         filename: '[path][base].br',
         algorithm: 'brotliCompress',
@@ -132,12 +133,12 @@ export default {
 
     // adding visualizer plugin
     if (addVisualizer) {
-      config.plugins.push(getBundleAnalyzerConfig().plugins[0]);
+      config.plugins!.push(getBundleAnalyzerConfig().plugins[0]);
     }
 
     // adding build stats plugin
     if (addBuildStats) {
-      config.plugins.push(getBuildStatsConfig().plugins[0]);
+      config.plugins!.push(getBuildStatsConfig().plugins[0]);
     }
 
     return config;

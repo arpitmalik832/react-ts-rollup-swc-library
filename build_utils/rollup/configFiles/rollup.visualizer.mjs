@@ -3,7 +3,7 @@ import { visualizer } from 'rollup-plugin-visualizer';
 /**
  * @returns {import('rollup').RollupOptions}
  */
-function getConfig(type) {
+const getConfig = type => {
   const timestamp = new Date().toISOString().replace(/:/g, '-');
   const path = `distInfo/${type === 'svgr' ? 'svgr' : 'main'}/${process.env.LIB_ENV}/visualizers/${timestamp}`;
 
@@ -35,6 +35,6 @@ function getConfig(type) {
       }),
     ],
   };
-}
+};
 
 export default getConfig;
