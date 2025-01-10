@@ -24,7 +24,7 @@ export default {
       throw new Error(ERR_NO_STORY_ENV_FLAG);
     }
 
-    const isRelease = process.env.STORY_ENV === ENVS.PROD;
+    const isProd = process.env.STORY_ENV === ENVS.PROD;
     const isBeta = process.env.STORY_ENV === ENVS.BETA;
 
     // adding handling for js files
@@ -57,7 +57,7 @@ export default {
             modules: {
               mode: 'local',
               localIdentName:
-                isRelease || isBeta
+                isProd || isBeta
                   ? '[hash:base64:5]'
                   : '[name]-[local]-[hash:base64:5]',
             },
@@ -72,17 +72,17 @@ export default {
     // eslint-disable-next-line no-param-reassign
     config.optimization = {
       ...config.optimization,
-      minimize: isRelease || isBeta,
+      minimize: isProd || isBeta,
       minimizer:
-        isRelease || isBeta
+        isProd || isBeta
           ? [
               new TerserPlugin({
                 terserOptions: {
                   compress: {
                     inline: false,
-                    drop_console: !!isRelease,
+                    drop_console: isProd,
                     dead_code: true,
-                    drop_debugger: !!isRelease,
+                    drop_debugger: isProd,
                     conditionals: true,
                     evaluate: true,
                     booleans: true,
