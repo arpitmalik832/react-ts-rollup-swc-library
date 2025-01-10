@@ -4,9 +4,9 @@
  */
 
 const list = [
-  'lg32/standardAccount.svg',
-  'rg24/systemActionABCKeypad.svg',
-  'sm16/systemAdd.svg',
-];
+  "lg32/standardAccount.svg",
+  "rg24/systemActionABCKeypad.svg",
+  "sm16/systemAdd.svg"
+]
 
 export default list;
