@@ -10,11 +10,11 @@ const generate = _generate.default;
 /**
  * @returns {import('rollup').InputPluginOption}
  */
-function stripCustomWindowVariables({
+const stripCustomWindowVariables = ({
   include = ['**/*.{cjs,mjs,js,jsx,ts,tsx}'],
   variables = [],
   exclude = [],
-}) {
+}) => {
   const filter = createFilter(include, exclude);
 
   return {
@@ -68,6 +68,6 @@ function stripCustomWindowVariables({
       };
     },
   };
-}
+};
 
 export default stripCustomWindowVariables;
