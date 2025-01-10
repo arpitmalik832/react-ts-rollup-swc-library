@@ -5,4 +5,9 @@ const ENVS = {
   DEV: 'development',
 };
 
-export { ENVS };
+const BUILD_TYPE = {
+  SVGR: 'svgr',
+  MAIN: 'main',
+};
+
+export { ENVS, BUILD_TYPE };
