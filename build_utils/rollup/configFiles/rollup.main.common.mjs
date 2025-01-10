@@ -29,10 +29,7 @@ const config = {
       sourcemap:
         process.env.LIB_ENV &&
         ![ENVS.PROD, ENVS.BETA].includes(process.env.LIB_ENV),
-      preserveModules: true,
-      preserveModulesRoot: 'src',
-      entryFileNames: `esm/[name].js`,
-      chunkFileNames: `esm/[name].js`,
+      entryFileNames: `esm/lib.js`,
     },
     {
       dir: outputPath,
@@ -40,10 +37,7 @@ const config = {
       sourcemap:
         process.env.LIB_ENV &&
         ![ENVS.PROD, ENVS.BETA].includes(process.env.LIB_ENV),
-      preserveModules: true,
-      preserveModulesRoot: 'src',
-      entryFileNames: `cjs/[name].js`,
-      chunkFileNames: `cjs/[name].js`,
+      entryFileNames: `cjs/lib.js`,
     },
   ],
   external: [/node_modules/], // Exclude node_modules

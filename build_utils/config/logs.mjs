@@ -7,9 +7,9 @@ const ERR_NO_STORY_ENV_FLAG =
 const ERR_NO_APP_ENV_FLAG =
   'You must pass the APP_ENV flag into your build for webpack to work!';
 
-function SERVER_STARTED_SUCCESSFULLY(port) {
+const SERVER_STARTED_SUCCESSFULLY = port => {
   chalk.green(`Server started at ${port} successfully !!!`);
-}
+};
 
 export {
   ERR_NO_LIB_ENV_FLAG,

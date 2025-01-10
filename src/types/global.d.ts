@@ -2,6 +2,11 @@ interface Window {
   backPress: () => void;
 }
 
+interface SVGComponent {
+  ReactComponent: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+  src: string;
+}
+
 declare module '*.svg' {
   export const ReactComponent: React.FunctionComponent<
     React.SVGProps<SVGSVGElement>
@@ -41,6 +46,6 @@ declare module '*.tiff' {
 }
 
 declare module '*.scss' {
-  const content: { [className: string]: string };
+  const content: Record<string, string>;
   export default content;
 }
