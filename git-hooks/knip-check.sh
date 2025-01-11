@@ -10,6 +10,14 @@ echo "\n${Blue}=================================${NC}\n"
 echo "${Green}Start - Knipping of the code.${NC}"
 
 pnpm knip:prod:check-files
+KNIP_EXIT_CODE=$?
+
+# Check if build failed
+if [ $KNIP_EXIT_CODE -ne 0 ]; then
+    echo "${Red}Knip failed with exit code $KNIP_EXIT_CODE${NC}"
+    echo "\n${Blue}=================================${NC}\n"
+    exit 1
+fi
 
 echo "${Green}End - Knipping of the code.${NC}"
 
