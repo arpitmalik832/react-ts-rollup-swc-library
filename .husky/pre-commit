@@ -2,7 +2,16 @@
 Red="\033[0;31m"
 Green="\033[0;32m"
 Blue="\033[0;34m"
+Yellow="\033[1;33m"
 NC="\033[0m" # No Color
+
+# Handle interrupts
+trap cleanup INT TERM
+
+cleanup() {
+    echo "\n${Yellow}Pre-commit hook interrupted by user${NC}"
+    exit 130
+}
 
 HOOKS_DIR="./git-hooks"
 
