@@ -10,6 +10,14 @@ echo "\n${Blue}=================================${NC}\n"
 echo "${Green}Start - Linting of the code.${NC}"
 
 pnpm lint:fix
+LINT_EXIT_CODE=$?
+
+# Check if build failed
+if [ $LINT_EXIT_CODE -ne 0 ]; then
+    echo "${Red}Lint failed with exit code $LINT_EXIT_CODE${NC}"
+    echo "\n${Blue}=================================${NC}\n"
+    exit 1
+fi
 # Adding changes made by lint-fix
 git add .
 
