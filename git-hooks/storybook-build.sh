@@ -10,6 +10,14 @@ NC="\033[0m" # No Color
 # echo "${Green}Start - Check storybook:build (Staging).${NC}"
 
 # pnpm storybook:build
+# STORYBOOK_BUILD_EXIT_CODE=$?
+
+# # Check if build failed
+# if [ $STORYBOOK_BUILD_EXIT_CODE -ne 0 ]; then
+#     echo "${Red}Storybook build failed with exit code $STORYBOOK_BUILD_EXIT_CODE${NC}"
+#     echo "\n${Blue}=================================${NC}\n"
+#     exit 1
+# fi
 
 # echo "${Green}End - Check storybook:build (Staging).${NC}"
 
@@ -21,6 +29,14 @@ NC="\033[0m" # No Color
 # echo "${Green}Start - Check storybook:build (Beta).${NC}"
 
 # pnpm storybook:build:beta
+# STORYBOOK_BUILD_EXIT_CODE=$?
+
+# # Check if build failed
+# if [ $STORYBOOK_BUILD_EXIT_CODE -ne 0 ]; then
+#     echo "${Red}Storybook build failed with exit code $STORYBOOK_BUILD_EXIT_CODE${NC}"
+#     echo "\n${Blue}=================================${NC}\n"
+#     exit 1
+# fi
 
 # echo "${Green}End - Check storybook:build (Beta).${NC}"
 
@@ -32,6 +48,14 @@ echo "\n${Blue}=================================${NC}\n"
 echo "${Green}Start - Check storybook:build (Production).${NC}"
 
 pnpm storybook:build:prod
+STORYBOOK_BUILD_EXIT_CODE=$?
+
+# Check if build failed
+if [ $STORYBOOK_BUILD_EXIT_CODE -ne 0 ]; then
+    echo "${Red}Storybook build failed with exit code $STORYBOOK_BUILD_EXIT_CODE${NC}"
+    echo "\n${Blue}=================================${NC}\n"
+    exit 1
+fi
 
 echo "${Green}End - Check storybook:build (Production).${NC}"
 
