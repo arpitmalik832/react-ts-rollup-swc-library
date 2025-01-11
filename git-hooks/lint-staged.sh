@@ -10,6 +10,15 @@ echo "\n${Blue}=================================${NC}\n"
 echo "${Green}Start - lint-staged of the code.${NC}"
 
 pnpm lint-staged
+LINT_STAGED_EXIT_CODE=$?
+
+# Check if build failed
+if [ $LINT_STAGED_EXIT_CODE -ne 0 ]; then
+    echo "${Red}Lint Staged failed with exit code $LINT_STAGED_EXIT_CODE${NC}"
+    echo "\n${Blue}=================================${NC}\n"
+    exit 1
+fi
+
 # Adding changes made by lint-staged
 git add .
 
