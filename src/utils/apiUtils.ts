@@ -14,7 +14,7 @@ const handleRequest = async <D>(
     .then(
       res => res.data, // Successful response
     )
-    .catch((error: AxiosError) => {
+    .catch((error: AxiosError<D>) => {
       if (error.response) {
         // Axios API Error Response
       } else if (error.message || error.config) {
@@ -112,7 +112,7 @@ const addResponseInterceptor = <T>(axiosInstance: AxiosInstance) => {
         } as InternalAxiosRequestConfig<RequestMetadata>,
       };
       errorLog('Response returned with error -> ', newError);
-      throw newError as AxiosError<T, RequestMetadata>;
+      throw newError;
     },
   );
 };
