@@ -1,7 +1,7 @@
 import { ReactComponent as StandardAccount } from '../../../assets/icons/lg32/standardAccount.svg';
 import forwardGrey from '../../../assets/images/forwardGrey.png';
 
-import s from './index.scss';
+import s from './index.module.scss';
 
 const Button = () => (
   <div data-testid="button" className={s.button}>
